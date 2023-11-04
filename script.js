@@ -1,31 +1,56 @@
-function getComputerChoice(){
+const div = document.createElement("div");
+  document.body.appendChild(div);
+
+  const btn1 = document.createElement('button');
+  const btn2 = document.createElement('button');
+  const btn3 = document.createElement('button');
+
+  div.appendChild(btn1);
+  div.appendChild(btn2);
+  div.appendChild(btn3);
+
+  function getComputerChoice(){
     let choice = [
-        'rock',
-        'paper',
-        'scissors'
+        'Rock',
+        'Paper',
+        'Scissors'
     ];
     let index = Math.floor(Math.random() * choice.length);
     return choice[index];
-}
+  }
 
-let computerSelection = getComputerChoice();
-
-let userinput = prompt("Enter Your Choice :");
-let playerSelection = userinput.toLowerCase();
-
-function playRound(playerSelection, computerSelection){
-    if(playerSelection === "rock" && computerSelection === "paper"){
-        return "You Lose! Paper beats Rock";
+  function playRound(playerSelection){
+      let computerSelection = getComputerChoice();
+      div.textContent = "Player Selected: " + playerSelection + ", Computer Selected: " + computerSelection;
+      if(playerSelection === "Rock" && computerSelection === "Paper"){
+        div.textContent += " - You Lose! Paper beats Rock";
     }
-    else if(playerSelection === "paper" && computerSelection === "scissors"){
-        return "You Lose! scissors beats paper";
+    else if(playerSelection === "Paper" && computerSelection === "Scissors"){
+        div.textContent += " - You Lose! Scissors beats Paper";
     }
-    else if(playerSelection === "scissors" && computerSelection === "rock"){
-        return "You Lose! Rock beats scissors";
+    else if(playerSelection === "Scissors" && computerSelection === "Rock"){
+        div.textContent += " - You Lose! Rock beats Scissors";
+    }
+    else if (playerSelection === computerSelection) {
+        div.textContent += " - It's a tie!";
     }
     else{
-        return "You Won";
+        div.textContent += " - You Won!";
     }
-}
+  }
 
-console.log(playRound(playerSelection, computerSelection));
+  btn1.textContent = "Rock";
+  btn2.textContent = "Paper";
+  btn3.textContent = "Scissors";
+
+  btn1.addEventListener('click', function(){
+      playRound("Rock");
+  });
+
+  btn2.addEventListener('click', function() {
+      playRound("Paper");
+  });
+
+  btn3.addEventListener('click', function(){
+      playRound("Scissors");
+  });
